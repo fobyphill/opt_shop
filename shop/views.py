@@ -27,7 +27,9 @@ def login_view(request):
         email = request.POST["email"]
         password = request.POST["password"]
         user = authenticate(request, username=email, password=password)
-
+#
+#
+#
         # Check if authentication successful
         if user is not None:
             login(request, user)
@@ -67,6 +69,7 @@ def register(request):
             User.last_name = last_name
             User.inn = inn
             User.gender = gender
+            #User.is_active = False
             User.save()
         except IntegrityError as e:
             print(e)
