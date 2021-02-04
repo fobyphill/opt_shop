@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h3>Здравствуйте, {{ request.user.first_name }} {{ request.user.last_name }}.
+        Ваш ИНН  {{ request.user.inn }}</h3>
+
+
+    <a class="btn btn-sm btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
+
+{% endblock %}
+
+{% block script %}
+    <script src="static/mail/inbox.js"></script>
+{% endblock %}
