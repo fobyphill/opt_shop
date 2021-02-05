@@ -69,15 +69,17 @@ def register(request):
             User.last_name = last_name
             User.inn = inn
             User.gender = gender
-            #User.is_active = False
+            User.is_active = False
             User.save()
         except IntegrityError as e:
             print(e)
             return render(request, "register.html", {
                 "message": "Email address already taken."
             })
-        login(request, User)
-        return HttpResponseRedirect(reverse("index"))
+        #login(request, User)
+        return render(request, "login.html", {
+            "message": "ждите модерации"
+        })
     else:
         return render(request, "register.html")
 
