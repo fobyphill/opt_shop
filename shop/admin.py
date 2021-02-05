@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import user
+from .models import UserAccount
 
 def set_active_user(modeladmin, request, queryset):
     queryset.update(is_active=True)
@@ -20,5 +20,5 @@ class ListAdmin(admin.ModelAdmin):
     actions = [set_active_user, set_passive_user]
     search_fields = ['first_name', 'last_name',]
 
-admin.site.register(user, ListAdmin)
+admin.site.register(UserAccount, ListAdmin)
 

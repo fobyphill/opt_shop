@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from .models import user
+from .models import UserAccount
 from .models import genders
 
 
@@ -22,17 +22,16 @@ def index(request):
 
 def login_view(request):
     if request.method == "POST":
-
         # Attempt to sign user in
         email = request.POST["email"]
         password = request.POST["password"]
-        user = authenticate(request, username=email, password=password)
+        UserAccount = authenticate(request, username=email, password=password)
 #
 #
 #
         # Check if authentication successful
-        if user is not None:
-            login(request, user)
+        if UserAccount is not None:
+            login(request, UserAccount)
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "login.html", {
@@ -63,7 +62,7 @@ def register(request):
 
         # Attempt to create new user
         try:
-            User = user.objects.create_user(email, email, password)
+            User = UserAccount.objects.create_user(email, email, password)
             User.save()
             User.first_name = first_name
             User.last_name = last_name

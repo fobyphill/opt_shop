@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser, BaseUserManager
 from django.db import models
 
 class genders(models.Model):
@@ -30,7 +30,7 @@ class contracts(models.Model):
     tovar_otgruzka = models.FloatField()
     descripton = models.CharField(max_length=255)
 
-class user(AbstractUser):
+class UserAccount(AbstractUser):
         inn = models.CharField(max_length=12, default='123456789')
         gender = models.ForeignKey(genders, on_delete=models.CASCADE, default='m')
 
