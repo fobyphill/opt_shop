@@ -7,11 +7,9 @@ from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserAccount
-from .models import genders
 
 
 def index(request):
-
     # Authenticated users view their inbox
     if request.user.is_authenticated:
         return render(request, "index.html")
@@ -50,7 +48,6 @@ def register(request):
         first_name = request.POST["first_name"]
         last_name = request.POST["last_name"]
         inn = request.POST["inn"]
-        gender = genders.objects.get(gender=request.POST["gender"])
         if password != confirmation:
             return render(request, "register.html", {
                 "message": "Passwords must match."
@@ -67,7 +64,6 @@ def register(request):
             User.first_name = first_name
             User.last_name = last_name
             User.inn = inn
-            User.gender = gender
             User.is_active = False
             User.save()
         except IntegrityError as e:

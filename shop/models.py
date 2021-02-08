@@ -1,10 +1,6 @@
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser, BaseUserManager
 from django.db import models
 
-class genders(models.Model):
-    gender = models.CharField(max_length=1, primary_key=True)
-    description = models.CharField(max_length=7)
-
 class client(models.Model):
     inn = models.CharField(max_length=12, primary_key=True)
     name = models.CharField(max_length=20)
@@ -12,7 +8,7 @@ class client(models.Model):
     patronymic = models.CharField(max_length=20)
     mail = models.CharField(max_length=50)
     birthday = models.DateField()
-    gender = models.ForeignKey(genders, on_delete=models.CASCADE)
+    #gender = models.ForeignKey(genders, on_delete=models.CASCADE)
     phone = models.CharField(max_length=11)
 
 class contracts(models.Model):
@@ -32,6 +28,5 @@ class contracts(models.Model):
 
 class UserAccount(AbstractUser):
         inn = models.CharField(max_length=12, default='123456789')
-        gender = models.ForeignKey(genders, on_delete=models.CASCADE, default='m')
 
 
