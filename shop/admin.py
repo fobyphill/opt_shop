@@ -9,10 +9,6 @@ def set_passive_user(modeladmin, request, queryset):
     queryset.update(is_active=False)
 set_passive_user.short_description = "Сделать неактивными"
 
-# class ActivePassiveListFilter(admin.SimpleListFilter):
-#     title = ("Модерация")
-#     parameter_name = 'is_acive'
-
 class ListAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'is_active']
     ordering = ['is_active']

@@ -24,9 +24,7 @@ def login_view(request):
         email = request.POST["email"]
         password = request.POST["password"]
         UserAccount = authenticate(request, username=email, password=password)
-#
-#
-#
+
         # Check if authentication successful
         if UserAccount is not None:
             login(request, UserAccount)
@@ -45,14 +43,14 @@ def register(request):
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
-        first_name = request.POST["first_name"]
-        last_name = request.POST["last_name"]
-        inn = request.POST["inn"]
+        firstname = request.POST["first_name"]
+        lastname = request.POST["last_name"]
+
         if password != confirmation:
             return render(request, "register.html", {
                 "message": "Passwords must match."
             })
-        if first_name == '' or last_name == '' or inn == "":
+        if firstname == '' or lastname == '':
             return render(request, 'register.html', {
                 'message': "Заполните пожалуйста все поля."
             })
@@ -61,9 +59,8 @@ def register(request):
         try:
             User = UserAccount.objects.create_user(email, email, password)
             User.save()
-            User.first_name = first_name
-            User.last_name = last_name
-            User.inn = inn
+            User.first_name = firstname
+            User.last_name = lastname
             User.is_active = False
             User.save()
         except IntegrityError as e:
